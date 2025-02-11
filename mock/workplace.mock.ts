@@ -1,6 +1,6 @@
-import { DataItem } from '@antv/g2plot/esm/interface/config';
 import dayjs from 'dayjs';
 import type { Request, Response } from 'express';
+import type { DataItem } from '@antv/g2plot/esm/interface/config';
 
 export type SearchDataType = {
   index: number;

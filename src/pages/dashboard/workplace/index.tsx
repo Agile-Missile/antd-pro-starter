@@ -1,10 +1,10 @@
-import { Radar } from '@ant-design/plots';
-import { PageContainer } from '@ant-design/pro-components';
-import { Link, useRequest } from '@umijs/max';
+import type { FC } from 'react';
 import { Avatar, Card, Col, List, Row, Skeleton, Statistic } from 'antd';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import type { FC } from 'react';
+import { Radar } from '@ant-design/plots';
+import { PageContainer } from '@ant-design/pro-components';
+import { Link, useRequest } from '@umijs/max';
 import EditableLinkGroup from './components/EditableLinkGroup';
 import type { ActivitiesType, CurrentUser } from './data.d';
 import { fakeChartData, queryActivities, queryProjectNotice } from './service';
@@ -89,8 +89,10 @@ const ExtraContent: FC<Record<string, any>> = () => {
 };
 const Workplace: FC = () => {
   const { styles } = useStyles();
-  const { loading: projectLoading, data: projectNotice = [] } = useRequest(queryProjectNotice);
-  const { loading: activitiesLoading, data: activities = [] } = useRequest(queryActivities);
+  const { loading: projectLoading, data: projectNotice = [] } =
+    useRequest(queryProjectNotice);
+  const { loading: activitiesLoading, data: activities = [] } =
+    useRequest(queryActivities);
   const { data } = useRequest(fakeChartData);
   const renderActivities = (item: ActivitiesType) => {
     const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
@@ -130,7 +132,8 @@ const Workplace: FC = () => {
       content={
         <PageHeaderContent
           currentUser={{
-            avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+            avatar:
+              'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
             name: '吴彦祖',
             userid: '00000001',
             email: 'antdesign@alipay.com',
@@ -154,18 +157,18 @@ const Workplace: FC = () => {
             extra={<Link to="/">全部项目</Link>}
             loading={projectLoading}
             styles={{
-              body:{
+              body: {
                 padding: 0,
-              }
+              },
             }}
           >
             {projectNotice.map((item) => (
               <Card.Grid className={styles.projectGrid} key={item.id}>
                 <Card
                   styles={{
-                    body:{
+                    body: {
                       padding: 0,
-                    }
+                    },
                   }}
                   variant="borderless"
                 >
@@ -192,9 +195,9 @@ const Workplace: FC = () => {
           </Card>
           <Card
             styles={{
-              body:{
+              body: {
                 padding: 0,
-              }
+              },
             }}
             variant="borderless"
             className={styles.activeCard}
@@ -218,12 +221,16 @@ const Workplace: FC = () => {
             title="快速开始 / 便捷导航"
             variant="borderless"
             styles={{
-              body:{
+              body: {
                 padding: 0,
-              }
+              },
             }}
           >
-            <EditableLinkGroup onAdd={() => {}} links={links} linkElement={Link} />
+            <EditableLinkGroup
+              onAdd={() => {}}
+              links={links}
+              linkElement={Link}
+            />
           </Card>
           <Card
             style={{
@@ -262,10 +269,10 @@ const Workplace: FC = () => {
           </Card>
           <Card
             styles={{
-              body:{
+              body: {
                 paddingTop: 12,
                 paddingBottom: 12,
-              }
+              },
             }}
             variant="borderless"
             title="团队"
@@ -278,7 +285,9 @@ const Workplace: FC = () => {
                     <Col span={12} key={`members-item-${item.id}`}>
                       <a>
                         <Avatar src={item.logo} size="small" />
-                        <span className={styles.member}>{item.member.substring(0, 3)}</span>
+                        <span className={styles.member}>
+                          {item.member.substring(0, 3)}
+                        </span>
                       </a>
                     </Col>
                   );

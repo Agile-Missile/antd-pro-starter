@@ -1,6 +1,6 @@
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import classNames from 'classnames';
 import React from 'react';
+import classNames from 'classnames';
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import useStyles from './index.style';
 
 export type TrendProps = {
@@ -27,10 +27,14 @@ const Trend: React.FC<TrendProps> = ({
       [styles.trendItemGrey]: !colorful,
       [styles.reverseColor]: reverseColor && colorful,
     },
-    className,
+    className
   );
   return (
-    <div {...rest} className={classString} title={typeof children === 'string' ? children : ''}>
+    <div
+      {...rest}
+      className={classString}
+      title={typeof children === 'string' ? children : ''}
+    >
       <span>{children}</span>
       {flag && (
         <span className={styles[flag]}>

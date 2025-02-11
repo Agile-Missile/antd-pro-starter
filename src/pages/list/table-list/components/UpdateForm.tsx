@@ -1,3 +1,5 @@
+import React from 'react';
+import { Modal } from 'antd';
 import {
   ProFormDateTimePicker,
   ProFormRadio,
@@ -6,8 +8,6 @@ import {
   ProFormTextArea,
   StepsForm,
 } from '@ant-design/pro-components';
-import { Modal } from 'antd';
-import React from 'react';
 import type { TableListItem } from '../data';
 
 export type FormValueType = {
@@ -36,9 +36,9 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <Modal
             width={640}
             styles={{
-              body:{
+              body: {
                 padding: '32px 40px 48px',
-              }
+              },
             }}
             destroyOnClose
             title="规则配置"

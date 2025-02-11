@@ -1,6 +1,10 @@
-import { AlipayOutlined, DingdingOutlined, TaobaoOutlined } from '@ant-design/icons';
-import { List } from 'antd';
 import React, { Fragment } from 'react';
+import { List } from 'antd';
+import {
+  AlipayOutlined,
+  DingdingOutlined,
+  TaobaoOutlined,
+} from '@ant-design/icons';
 
 const BindingView: React.FC = () => {
   const getData = () => [

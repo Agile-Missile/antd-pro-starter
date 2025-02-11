@@ -1,6 +1,6 @@
-import { GridContent } from '@ant-design/pro-components';
-import { Menu } from 'antd';
 import React, { useLayoutEffect, useRef, useState } from 'react';
+import { Menu } from 'antd';
+import { GridContent } from '@ant-design/pro-components';
 import BaseView from './components/base';
 import BindingView from './components/binding';
 import NotificationView from './components/notification';
@@ -53,7 +53,10 @@ const Settings: React.FC = () => {
     };
   }, [dom.current]);
   const getMenu = () => {
-    return Object.keys(menuMap).map((item) => ({ key: item, label: menuMap[item] }));
+    return Object.keys(menuMap).map((item) => ({
+      key: item,
+      label: menuMap[item],
+    }));
   };
   const renderChildren = () => {
     const { selectKey } = initConfig;

@@ -1,6 +1,6 @@
-import { Link, useSearchParams } from '@umijs/max';
-import { Button, Result } from 'antd';
 import React from 'react';
+import { Button, Result } from 'antd';
+import { Link, useSearchParams } from '@umijs/max';
 import useStyles from './style.style';
 
 const RegisterResult: React.FC<Record<string, unknown>> = () => {

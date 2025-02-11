@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import React from 'react';
 import { Card } from 'antd';
 import type { CardProps } from 'antd/es/card';
 import classNames from 'classnames';
-import React from 'react';
 import useStyles from './index.style';
 type totalType = () => React.ReactNode;
 
@@ -36,7 +36,16 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
     return totalDom;
   };
   const renderContent = () => {
-    const { contentHeight, title, avatar, action, total, footer, children, loading } = props;
+    const {
+      contentHeight,
+      title,
+      avatar,
+      action,
+      total,
+      footer,
+      children,
+      loading,
+    } = props;
     if (loading) {
       return false;
     }
@@ -63,7 +72,9 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
               height: contentHeight || 'auto',
             }}
           >
-            <div className={contentHeight && styles.contentFixed}>{children}</div>
+            <div className={contentHeight && styles.contentFixed}>
+              {children}
+            </div>
           </div>
         )}
         {footer && (
@@ -94,9 +105,9 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
     <Card
       loading={loading}
       styles={{
-        body:{
+        body: {
           padding: '20px 24px 8px 24px',
-        }
+        },
       }}
       {...rest}
     >

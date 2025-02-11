@@ -1,7 +1,7 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, Divider, Input, message, Popconfirm, Table } from 'antd';
 import type { FC } from 'react';
 import React, { useState } from 'react';
+import { Button, Divider, Input, message, Popconfirm, Table } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import useStyles from '../style.style';
 type TableFormDateType = {
   key: string;
@@ -20,11 +20,16 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
   const [clickedCancel, setClickedCancel] = useState(false);
   const [loading, setLoading] = useState(false);
   const [index, setIndex] = useState(0);
-  const [cacheOriginData, setCacheOriginData] = useState<Record<string, any>>({});
+  const [cacheOriginData, setCacheOriginData] = useState<Record<string, any>>(
+    {}
+  );
   const [data, setData] = useState(value);
   const getRowByKey = (key: string, newData?: TableFormDateType[]) =>
     (newData || data)?.filter((item) => item.key === key)[0];
-  const toggleEditable = (e: React.MouseEvent | React.KeyboardEvent, key: string) => {
+  const toggleEditable = (
+    e: React.MouseEvent | React.KeyboardEvent,
+    key: string
+  ) => {
     e.preventDefault();
     const newData = data?.map((item) => ({
       ...item,
@@ -59,7 +64,9 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
     setData(newData);
   };
   const remove = (key: string) => {
-    const newData = data?.filter((item) => item.key !== key) as TableFormDateType[];
+    const newData = data?.filter(
+      (item) => item.key !== key
+    ) as TableFormDateType[];
     setData(newData);
     if (onChange) {
       onChange(newData);
@@ -68,7 +75,7 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
   const handleFieldChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     fieldName: keyof TableFormDateType,
-    key: string,
+    key: string
   ) => {
     const newData = [...(data as TableFormDateType[])];
     const target = getRowByKey(key, newData);
@@ -201,7 +208,10 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
               <span>
                 <a onClick={(e) => saveRow(e, record.key)}>添加</a>
                 <Divider type="vertical" />
-                <Popconfirm title="是否要删除此行？" onConfirm={() => remove(record.key)}>
+                <Popconfirm
+                  title="是否要删除此行？"
+                  onConfirm={() => remove(record.key)}
+                >
                   <a>删除</a>
                 </Popconfirm>
               </span>
@@ -219,7 +229,10 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
           <span>
             <a onClick={(e) => toggleEditable(e, record.key)}>编辑</a>
             <Divider type="vertical" />
-            <Popconfirm title="是否要删除此行？" onConfirm={() => remove(record.key)}>
+            <Popconfirm
+              title="是否要删除此行？"
+              onConfirm={() => remove(record.key)}
+            >
               <a>删除</a>
             </Popconfirm>
           </span>

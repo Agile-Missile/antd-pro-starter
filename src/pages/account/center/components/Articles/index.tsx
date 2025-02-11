@@ -1,7 +1,7 @@
+import React from 'react';
+import { List, Tag } from 'antd';
 import { LikeOutlined, MessageFilled, StarTwoTone } from '@ant-design/icons';
 import { useRequest } from '@umijs/max';
-import { List, Tag } from 'antd';
-import React from 'react';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
 import ArticleListContent from '../ArticleListContent';
@@ -36,7 +36,11 @@ const Articles: React.FC = () => {
           actions={[
             <IconText key="star" icon={<StarTwoTone />} text={item.star} />,
             <IconText key="like" icon={<LikeOutlined />} text={item.like} />,
-            <IconText key="message" icon={<MessageFilled />} text={item.message} />,
+            <IconText
+              key="message"
+              icon={<MessageFilled />}
+              text={item.message}
+            />,
           ]}
         >
           <List.Item.Meta

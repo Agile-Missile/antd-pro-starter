@@ -2,7 +2,7 @@ import { request } from '@umijs/max';
 import type { ListItemDataType, Params } from './data.d';
 
 export async function queryFakeList(
-  params: Params,
+  params: Params
 ): Promise<{ data: { list: ListItemDataType[] } }> {
   return request('/api/fake_list', {
     params,

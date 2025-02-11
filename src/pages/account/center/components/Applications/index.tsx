@@ -1,3 +1,6 @@
+import React from 'react';
+import { Avatar, Card, Dropdown, List, Tooltip } from 'antd';
+import numeral from 'numeral';
 import {
   DownloadOutlined,
   EditOutlined,
@@ -5,9 +8,6 @@ import {
   ShareAltOutlined,
 } from '@ant-design/icons';
 import { useRequest } from '@umijs/max';
-import { Avatar, Card, Dropdown, List, Tooltip } from 'antd';
-import numeral from 'numeral';
-import React from 'react';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
 import useStyles from './index.style';
@@ -78,9 +78,9 @@ const Applications: React.FC = () => {
           <Card
             hoverable
             styles={{
-              body:{
+              body: {
                 paddingBottom: 20,
-              }
+              },
             }}
             actions={[
               <Tooltip key="download" title="下载">
@@ -109,7 +109,10 @@ const Applications: React.FC = () => {
               </Dropdown>,
             ]}
           >
-            <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
+            <Card.Meta
+              avatar={<Avatar size="small" src={item.avatar} />}
+              title={item.title}
+            />
             <div>
               <CardInfo
                 activeUser={formatWan(item.activeUser)}

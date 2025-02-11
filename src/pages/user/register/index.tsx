@@ -1,8 +1,19 @@
-import { history, Link, useRequest } from '@umijs/max';
-import { Button, Col, Form, Input, message, Popover, Progress, Row, Select, Space } from 'antd';
-import type { Store } from 'antd/es/form/interface';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  message,
+  Popover,
+  Progress,
+  Row,
+  Select,
+  Space,
+} from 'antd';
+import type { Store } from 'antd/es/form/interface';
+import { history, Link, useRequest } from '@umijs/max';
 import type { StateType } from './service';
 import { fakeRegister } from './service';
 import useStyles from './style.style';
@@ -51,7 +62,7 @@ const Register: FC = () => {
     () => () => {
       clearInterval(interval);
     },
-    [interval],
+    [interval]
   );
   const onGetCaptcha = () => {
     let counts = 59;
@@ -127,7 +138,7 @@ const Register: FC = () => {
       <div className={styles[`progress-${passwordStatus}`]}>
         <Progress
           status={passwordProgressMap[passwordStatus]}
-          strokeWidth={6}
+          size={6}
           percent={value.length * 10 > 100 ? 100 : value.length * 10}
           showInfo={false}
         />
@@ -198,7 +209,11 @@ const Register: FC = () => {
               },
             ]}
           >
-            <Input size="large" type="password" placeholder="至少6位密码，区分大小写" />
+            <Input
+              size="large"
+              type="password"
+              placeholder="至少6位密码，区分大小写"
+            />
           </FormItem>
         </Popover>
         <FormItem

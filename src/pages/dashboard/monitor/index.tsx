@@ -1,9 +1,9 @@
+import type { FC } from 'react';
+import { Card, Col, Progress, Row, Statistic } from 'antd';
+import numeral from 'numeral';
 import { Gauge, Liquid, WordCloud } from '@ant-design/plots';
 import { GridContent } from '@ant-design/pro-components';
 import { useRequest } from '@umijs/max';
-import { Card, Col, Progress, Row, Statistic } from 'antd';
-import numeral from 'numeral';
-import type { FC } from 'react';
 import ActiveChart from './components/ActiveChart';
 import Map from './components/Map';
 import { queryTags } from './service';
@@ -49,10 +49,18 @@ const Monitor: FC = () => {
                   <Statistic title="销售目标完成率" value="92%" />
                 </Col>
                 <Col md={6} sm={12} xs={24}>
-                  <Countdown title="活动剩余时间" value={deadline} format="HH:mm:ss:SSS" />
+                  <Countdown
+                    title="活动剩余时间"
+                    value={deadline}
+                    format="HH:mm:ss:SSS"
+                  />
                 </Col>
                 <Col md={6} sm={12} xs={24}>
-                  <Statistic title="每秒交易总额" suffix="元" value={numeral(234).format('0,0')} />
+                  <Statistic
+                    title="每秒交易总额"
+                    suffix="元"
+                    value={numeral(234).format('0,0')}
+                  />
                 </Col>
               </Row>
               <div className={styles.mapChart}>
@@ -76,9 +84,9 @@ const Monitor: FC = () => {
                 marginBottom: 24,
               }}
               styles={{
-                body:{
+                body: {
                   textAlign: 'center',
-                }
+                },
               }}
               variant="borderless"
             >
@@ -98,7 +106,13 @@ const Monitor: FC = () => {
                 }}
                 meta={{
                   color: {
-                    range: ['#6395FA', '#62DAAB', '#657798', '#F7C128', '#1F8718'],
+                    range: [
+                      '#6395FA',
+                      '#62DAAB',
+                      '#657798',
+                      '#F7C128',
+                      '#1F8718',
+                    ],
                   },
                 }}
               />
@@ -147,9 +161,9 @@ const Monitor: FC = () => {
               loading={loading}
               variant="borderless"
               styles={{
-                body:{
+                body: {
                   overflow: 'hidden',
-                }
+                },
               }}
             >
               <WordCloud
@@ -173,10 +187,10 @@ const Monitor: FC = () => {
             <Card
               title="资源剩余"
               styles={{
-                body:{
+                body: {
                   textAlign: 'center',
                   fontSize: 0,
-                }
+                },
               }}
               variant="borderless"
             >

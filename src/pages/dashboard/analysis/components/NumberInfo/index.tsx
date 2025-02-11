@@ -1,6 +1,6 @@
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import classNames from 'classnames';
 import React from 'react';
+import classNames from 'classnames';
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import useStyles from './index.style';
 export type NumberInfoProps = {
   title?: React.ReactNode | string;
@@ -33,7 +33,10 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
       {...rest}
     >
       {title && (
-        <div className={styles.numberInfoTitle} title={typeof title === 'string' ? title : ''}>
+        <div
+          className={styles.numberInfoTitle}
+          title={typeof title === 'string' ? title : ''}
+        >
           {title}
         </div>
       )}
@@ -62,7 +65,11 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
         {(status || subTotal) && (
           <span className={styles.subTotal}>
             {subTotal}
-            {status && status === 'up' ? <CaretUpOutlined /> : <CaretDownOutlined />}
+            {status && status === 'up' ? (
+              <CaretUpOutlined />
+            ) : (
+              <CaretDownOutlined />
+            )}
           </span>
         )}
       </div>

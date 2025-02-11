@@ -1,8 +1,8 @@
-import { Pie } from '@ant-design/plots';
+import React from 'react';
 import { Card, Radio, Typography } from 'antd';
 import type { RadioChangeEvent } from 'antd/es/radio';
 import numeral from 'numeral';
-import React from 'react';
+import { Pie } from '@ant-design/plots';
 import type { DataItem } from '../data.d';
 import useStyles from '../style.style';
 const { Text } = Typography;

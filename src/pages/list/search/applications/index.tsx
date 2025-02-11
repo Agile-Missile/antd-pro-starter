@@ -1,3 +1,17 @@
+import type { FC } from 'react';
+import React from 'react';
+import {
+  Avatar,
+  Card,
+  Col,
+  Dropdown,
+  Form,
+  List,
+  Row,
+  Select,
+  Tooltip,
+} from 'antd';
+import numeral from 'numeral';
 import {
   DownloadOutlined,
   EditOutlined,
@@ -5,10 +19,6 @@ import {
   ShareAltOutlined,
 } from '@ant-design/icons';
 import { useRequest } from '@umijs/max';
-import { Avatar, Card, Col, Dropdown, Form, List, Row, Select, Tooltip } from 'antd';
-import numeral from 'numeral';
-import type { FC } from 'react';
-import React from 'react';
 import { categoryOptions } from '../../mock';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
@@ -96,7 +106,10 @@ export const Applications: FC<Record<string, any>> = () => {
             <Form.Item name="category">
               <TagSelect expandable>
                 {categoryOptions.map((category) => (
-                  <TagSelect.Option value={category.value!} key={category.value}>
+                  <TagSelect.Option
+                    value={category.value!}
+                    key={category.value}
+                  >
                     {category.label}
                   </TagSelect.Option>
                 ))}
@@ -165,9 +178,9 @@ export const Applications: FC<Record<string, any>> = () => {
           <List.Item key={item.id}>
             <Card
               styles={{
-                body:{
+                body: {
                   paddingBottom: 20,
-                }
+                },
               }}
               actions={[
                 <Tooltip key="download" title="下载">
@@ -198,7 +211,10 @@ export const Applications: FC<Record<string, any>> = () => {
                 </Dropdown>,
               ]}
             >
-              <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
+              <Card.Meta
+                avatar={<Avatar size="small" src={item.avatar} />}
+                title={item.title}
+              />
               <div>
                 <CardInfo
                   activeUser={formatWan(item.activeUser)}

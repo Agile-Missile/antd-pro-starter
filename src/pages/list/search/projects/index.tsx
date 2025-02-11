@@ -1,8 +1,8 @@
-import { useRequest } from '@umijs/max';
+import type { FC } from 'react';
 import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import type { FC } from 'react';
+import { useRequest } from '@umijs/max';
 import { categoryOptions } from '../../mock';
 import AvatarList from './components/AvatarList';
 import StandardFormRow from './components/StandardFormRow';
@@ -41,7 +41,11 @@ const Projects: FC = () => {
       dataSource={list}
       renderItem={(item) => (
         <List.Item>
-          <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
+          <Card
+            className={styles.card}
+            hoverable
+            cover={<img alt={item.title} src={item.cover} />}
+          >
             <Card.Meta
               title={<a>{item.title}</a>}
               description={
@@ -104,7 +108,10 @@ const Projects: FC = () => {
             <FormItem name="category">
               <TagSelect expandable>
                 {categoryOptions.map((category) => (
-                  <TagSelect.Option value={category.value!} key={category.value}>
+                  <TagSelect.Option
+                    value={category.value!}
+                    key={category.value}
+                  >
                     {category.label}
                   </TagSelect.Option>
                 ))}

@@ -1,5 +1,5 @@
-import { Line, Tiny } from '@ant-design/plots';
 import { Card, Col, Row, Tabs } from 'antd';
+import { Line, Tiny } from '@ant-design/plots';
 import type { DataItem, OfflineDataType } from '../data.d';
 import useStyles from '../style.style';
 import NumberInfo from './NumberInfo';
@@ -32,7 +32,12 @@ const CustomTab = ({
         paddingTop: 36,
       }}
     >
-      <Tiny.Ring height={60} width={60} percent={data.cvr} color={['#E8EEF4', '#5FABF4']} />
+      <Tiny.Ring
+        height={60}
+        width={60}
+        percent={data.cvr}
+        color={['#E8EEF4', '#5FABF4']}
+      />
     </Col>
   </Row>
 );
@@ -81,7 +86,12 @@ const OfflineData = ({
                 slider={{ x: true }}
                 axis={{
                   x: { title: false },
-                  y: { title: false, gridLineDash: null, gridStroke: '#ccc', gridStrokeOpacity: 1 },
+                  y: {
+                    title: false,
+                    gridLineDash: null,
+                    gridStroke: '#ccc',
+                    gridStrokeOpacity: 1,
+                  },
                 }}
                 legend={{
                   color: {

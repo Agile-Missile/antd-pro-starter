@@ -1,3 +1,14 @@
+import React, { useRef, useState } from 'react';
+import type { FormInstance } from 'antd';
+import {
+  Alert,
+  Button,
+  Card,
+  Descriptions,
+  Divider,
+  Result,
+  Statistic,
+} from 'antd';
 import {
   PageContainer,
   ProForm,
@@ -6,9 +17,6 @@ import {
   ProFormText,
   StepsForm,
 } from '@ant-design/pro-components';
-import type { FormInstance } from 'antd';
-import { Alert, Button, Card, Descriptions, Divider, Result, Statistic } from 'antd';
-import React, { useRef, useState } from 'react';
 import type { StepDataType } from './data.d';
 import useStyles from './style.style';
 const StepDescriptions: React.FC<{

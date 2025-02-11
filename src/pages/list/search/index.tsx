@@ -1,7 +1,7 @@
+import type { FC } from 'react';
+import { Input } from 'antd';
 import { PageContainer } from '@ant-design/pro-components';
 import { history, Outlet, useLocation, useMatch } from '@umijs/max';
-import { Input } from 'antd';
-import type { FC } from 'react';
 
 type SearchProps = {
   children?: React.ReactNode;
@@ -24,10 +24,12 @@ const tabList = [
 
 const Search: FC<SearchProps> = () => {
   const location = useLocation();
-  let match = useMatch(location.pathname);
+  const match = useMatch(location.pathname);
   const handleTabChange = (key: string) => {
     const url =
-      match?.pathname === '/' ? '' : match?.pathname.substring(0, match.pathname.lastIndexOf('/'));
+      match?.pathname === '/'
+        ? ''
+        : match?.pathname.substring(0, match.pathname.lastIndexOf('/'));
     switch (key) {
       case 'articles':
         history.push(`${url}/articles`);
@@ -44,12 +46,13 @@ const Search: FC<SearchProps> = () => {
   };
 
   const handleFormSubmit = (value: string) => {
-    // eslint-disable-next-line no-console
     console.log(value);
   };
 
   const getTabKey = () => {
-    const tabKey = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
+    const tabKey = location.pathname.substring(
+      location.pathname.lastIndexOf('/') + 1
+    );
     if (tabKey && tabKey !== '/') {
       return tabKey;
     }

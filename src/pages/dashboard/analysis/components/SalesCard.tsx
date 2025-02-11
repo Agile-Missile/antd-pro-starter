@@ -1,8 +1,8 @@
-import { Column } from '@ant-design/plots';
 import { Card, Col, DatePicker, Row, Tabs } from 'antd';
 import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
 import type dayjs from 'dayjs';
 import numeral from 'numeral';
+import { Column } from '@ant-design/plots';
 import type { DataItem } from '../data.d';
 import useStyles from '../style.style';
 
@@ -42,9 +42,9 @@ const SalesCard = ({
       loading={loading}
       variant="borderless"
       styles={{
-        body:{
+        body: {
           padding: 0,
-        }
+        },
       }}
     >
       <div className={styles.salesCard}>
@@ -52,16 +52,28 @@ const SalesCard = ({
           tabBarExtraContent={
             <div className={styles.salesExtraWrap}>
               <div className={styles.salesExtra}>
-                <a className={isActive('today')} onClick={() => selectDate('today')}>
+                <a
+                  className={isActive('today')}
+                  onClick={() => selectDate('today')}
+                >
                   今日
                 </a>
-                <a className={isActive('week')} onClick={() => selectDate('week')}>
+                <a
+                  className={isActive('week')}
+                  onClick={() => selectDate('week')}
+                >
                   本周
                 </a>
-                <a className={isActive('month')} onClick={() => selectDate('month')}>
+                <a
+                  className={isActive('month')}
+                  onClick={() => selectDate('month')}
+                >
                   本月
                 </a>
-                <a className={isActive('year')} onClick={() => selectDate('year')}>
+                <a
+                  className={isActive('year')}
+                  onClick={() => selectDate('year')}
+                >
                   本年
                 </a>
               </div>
@@ -125,7 +137,10 @@ const SalesCard = ({
                             >
                               {i + 1}
                             </span>
-                            <span className={styles.rankingItemTitle} title={item.title}>
+                            <span
+                              className={styles.rankingItemTitle}
+                              title={item.title}
+                            >
                               {item.title}
                             </span>
                             <span>{numeral(item.total).format('0,0')}</span>
@@ -176,12 +191,17 @@ const SalesCard = ({
                           <li key={item.title}>
                             <span
                               className={`${
-                                i < 3 ? styles.rankingItemNumberActive : styles.rankingItemNumber
+                                i < 3
+                                  ? styles.rankingItemNumberActive
+                                  : styles.rankingItemNumber
                               }`}
                             >
                               {i + 1}
                             </span>
-                            <span className={styles.rankingItemTitle} title={item.title}>
+                            <span
+                              className={styles.rankingItemTitle}
+                              title={item.title}
+                            >
                               {item.title}
                             </span>
                             <span>{numeral(item.total).format('0,0')}</span>

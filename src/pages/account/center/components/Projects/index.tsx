@@ -1,8 +1,8 @@
-import { useRequest } from '@umijs/max';
+import React from 'react';
 import { Card, List } from 'antd';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import React from 'react';
+import { useRequest } from '@umijs/max';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
 import AvatarList from '../AvatarList';
@@ -32,8 +32,15 @@ const Projects: React.FC = () => {
       dataSource={listData?.list || []}
       renderItem={(item) => (
         <List.Item>
-          <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
-            <Card.Meta title={<a>{item.title}</a>} description={item.subDescription} />
+          <Card
+            className={styles.card}
+            hoverable
+            cover={<img alt={item.title} src={item.cover} />}
+          >
+            <Card.Meta
+              title={<a>{item.title}</a>}
+              description={item.subDescription}
+            />
             <div className={styles.cardItemContent}>
               <span>{dayjs(item.updatedAt).fromNow()}</span>
               <div className={styles.avatarList}>

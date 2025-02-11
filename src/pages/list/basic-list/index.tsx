@@ -1,6 +1,5 @@
-import { DownOutlined, PlusOutlined } from '@ant-design/icons';
-import { PageContainer } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
+import type { FC } from 'react';
+import React, { useState } from 'react';
 import {
   Avatar,
   Button,
@@ -15,11 +14,17 @@ import {
   Row,
 } from 'antd';
 import dayjs from 'dayjs';
-import type { FC } from 'react';
-import React, { useState } from 'react';
+import { DownOutlined, PlusOutlined } from '@ant-design/icons';
+import { PageContainer } from '@ant-design/pro-components';
+import { useRequest } from '@umijs/max';
 import OperationModal from './components/OperationModal';
 import type { BasicListItemDataType } from './data.d';
-import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from './service';
+import {
+  addFakeList,
+  queryFakeList,
+  removeFakeList,
+  updateFakeList,
+} from './service';
 import useStyles from './style.style';
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -58,7 +63,7 @@ const ListContent = ({
         <Progress
           percent={percent}
           status={status}
-          strokeWidth={6}
+          size={6}
           style={{
             width: 180,
           }}
@@ -71,7 +76,9 @@ export const BasicList: FC = () => {
   const { styles } = useStyles();
   const [done, setDone] = useState<boolean>(false);
   const [open, setVisible] = useState<boolean>(false);
-  const [current, setCurrent] = useState<Partial<BasicListItemDataType> | undefined>(undefined);
+  const [current, setCurrent] = useState<
+    Partial<BasicListItemDataType> | undefined
+  >(undefined);
   const {
     data: listData,
     loading,
@@ -96,7 +103,7 @@ export const BasicList: FC = () => {
       onSuccess: (result) => {
         mutate(result);
       },
-    },
+    }
   );
   const list = listData?.list || [];
   const paginationProps = {
@@ -114,7 +121,10 @@ export const BasicList: FC = () => {
       id,
     });
   };
-  const editAndDelete = (key: string | number, currentItem: BasicListItemDataType) => {
+  const editAndDelete = (
+    key: string | number,
+    currentItem: BasicListItemDataType
+  ) => {
     if (key === 'edit') showEditModal(currentItem);
     else if (key === 'delete') {
       Modal.confirm({
@@ -133,7 +143,11 @@ export const BasicList: FC = () => {
         <RadioButton value="progress">进行中</RadioButton>
         <RadioButton value="waiting">等待中</RadioButton>
       </RadioGroup>
-      <Search className={styles.extraContentSearch} placeholder="请输入" onSearch={() => ({})} />
+      <Search
+        className={styles.extraContentSearch}
+        placeholder="请输入"
+        onSearch={() => ({})}
+      />
     </div>
   );
   const MoreBtn: React.FC<{
@@ -195,9 +209,9 @@ export const BasicList: FC = () => {
               marginTop: 24,
             }}
             styles={{
-              body:{
+              body: {
                 padding: '0 32px 40px 32px',
-              }
+              },
             }}
             extra={extraContent}
           >
@@ -223,7 +237,9 @@ export const BasicList: FC = () => {
                   ]}
                 >
                   <List.Item.Meta
-                    avatar={<Avatar src={item.logo} shape="square" size="large" />}
+                    avatar={
+                      <Avatar src={item.logo} shape="square" size="large" />
+                    }
                     title={<a href={item.href}>{item.title}</a>}
                     description={item.subDescription}
                   />

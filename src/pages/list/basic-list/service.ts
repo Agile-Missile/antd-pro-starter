@@ -6,7 +6,7 @@ type ParamsType = {
 } & Partial<BasicListItemDataType>;
 
 export async function queryFakeList(
-  params: ParamsType,
+  params: ParamsType
 ): Promise<{ data: { list: BasicListItemDataType[] } }> {
   return request('/api/get_list', {
     params,
@@ -14,7 +14,7 @@ export async function queryFakeList(
 }
 
 export async function removeFakeList(
-  params: ParamsType,
+  params: ParamsType
 ): Promise<{ data: { list: BasicListItemDataType[] } }> {
   return request('/api/post_fake_list', {
     method: 'POST',
@@ -26,7 +26,7 @@ export async function removeFakeList(
 }
 
 export async function addFakeList(
-  params: ParamsType,
+  params: ParamsType
 ): Promise<{ data: { list: BasicListItemDataType[] } }> {
   return request('/api/post_fake_list', {
     method: 'POST',
@@ -38,7 +38,7 @@ export async function addFakeList(
 }
 
 export async function updateFakeList(
-  params: ParamsType,
+  params: ParamsType
 ): Promise<{ data: { list: BasicListItemDataType[] } }> {
   return request('/api/post_fake_list', {
     method: 'POST',

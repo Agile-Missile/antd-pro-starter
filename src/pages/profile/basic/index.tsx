@@ -1,9 +1,9 @@
+import type { FC } from 'react';
+import React from 'react';
+import { Badge, Card, Descriptions, Divider } from 'antd';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { useRequest } from '@umijs/max';
-import { Badge, Card, Descriptions, Divider } from 'antd';
-import type { FC } from 'react';
-import React from 'react';
 import type { BasicGood, BasicProgress } from './data.d';
 import { queryBasicProfile } from './service';
 import useStyles from './style.style';
@@ -191,7 +191,9 @@ const Basic: FC = () => {
           <Descriptions.Item label="用户姓名">付小小</Descriptions.Item>
           <Descriptions.Item label="联系电话">18100000000</Descriptions.Item>
           <Descriptions.Item label="常用快递">菜鸟仓储</Descriptions.Item>
-          <Descriptions.Item label="取货地址">浙江省杭州市西湖区万塘路18号</Descriptions.Item>
+          <Descriptions.Item label="取货地址">
+            浙江省杭州市西湖区万塘路18号
+          </Descriptions.Item>
           <Descriptions.Item label="备注">无</Descriptions.Item>
         </Descriptions>
         <Divider

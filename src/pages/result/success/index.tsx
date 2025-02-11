@@ -1,7 +1,7 @@
+import { Fragment } from 'react';
+import { Button, Card, Descriptions, Result, Steps } from 'antd';
 import { DingdingOutlined } from '@ant-design/icons';
 import { GridContent } from '@ant-design/pro-components';
-import { Button, Card, Descriptions, Result, Steps } from 'antd';
-import { Fragment } from 'react';
 import useStyles from './index.style';
 
 const { Step } = Steps;
@@ -56,7 +56,9 @@ export default () => {
       <Descriptions title="项目名称">
         <Descriptions.Item label="项目 ID">23421</Descriptions.Item>
         <Descriptions.Item label="负责人">曲丽丽</Descriptions.Item>
-        <Descriptions.Item label="生效时间">2016-12-12 ~ 2017-12-12</Descriptions.Item>
+        <Descriptions.Item label="生效时间">
+          2016-12-12 ~ 2017-12-12
+        </Descriptions.Item>
       </Descriptions>
       <br />
       <Steps progressDot current={1}>

@@ -1,3 +1,5 @@
+import type { FC } from 'react';
+import { Card, message } from 'antd';
 import {
   PageContainer,
   ProForm,
@@ -10,8 +12,6 @@ import {
   ProFormTextArea,
 } from '@ant-design/pro-components';
 import { useRequest } from '@umijs/max';
-import { Card, message } from 'antd';
-import type { FC } from 'react';
 import { fakeSubmitForm } from './service';
 import useStyles from './style.style';
 const BasicForm: FC<Record<string, any>> = () => {
@@ -163,7 +163,8 @@ const BasicForm: FC<Record<string, any>> = () => {
                   fieldProps={{
                     style: {
                       margin: '8px 0',
-                      display: publicType && publicType === '2' ? 'block' : 'none',
+                      display:
+                        publicType && publicType === '2' ? 'block' : 'none',
                     },
                   }}
                   options={[

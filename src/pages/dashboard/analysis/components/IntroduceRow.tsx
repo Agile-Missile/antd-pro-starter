@@ -1,7 +1,7 @@
-import { InfoCircleOutlined } from '@ant-design/icons';
-import { Area, Column } from '@ant-design/plots';
 import { Col, Progress, Row, Tooltip } from 'antd';
 import numeral from 'numeral';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Area, Column } from '@ant-design/plots';
 import type { DataItem } from '../data.d';
 import useStyles from '../style.style';
 import Yuan from '../utils/Yuan';
@@ -17,7 +17,13 @@ const topColResponsiveProps = {
     marginBottom: 24,
   },
 };
-const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: DataItem[] }) => {
+const IntroduceRow = ({
+  loading,
+  visitData,
+}: {
+  loading: boolean;
+  visitData: DataItem[];
+}) => {
   const { styles } = useStyles();
   return (
     <Row gutter={24}>
@@ -32,7 +38,12 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Dat
           }
           loading={loading}
           total={() => <Yuan>126560</Yuan>}
-          footer={<Field label="日销售额" value={`￥${numeral(12423).format('0,0')}`} />}
+          footer={
+            <Field
+              label="日销售额"
+              value={`￥${numeral(12423).format('0,0')}`}
+            />
+          }
           contentHeight={46}
         >
           <Trend
@@ -62,7 +73,9 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Dat
             </Tooltip>
           }
           total={numeral(8846).format('0,0')}
-          footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
+          footer={
+            <Field label="日访问量" value={numeral(1234).format('0,0')} />
+          }
           contentHeight={46}
         >
           <Area
@@ -141,7 +154,11 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Dat
           }
           contentHeight={46}
         >
-          <Progress percent={78} strokeColor={{ from: '#108ee9', to: '#87d068' }} status="active" />
+          <Progress
+            percent={78}
+            strokeColor={{ from: '#108ee9', to: '#87d068' }}
+            status="active"
+          />
         </ChartCard>
       </Col>
     </Row>

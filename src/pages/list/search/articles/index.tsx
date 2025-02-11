@@ -1,9 +1,14 @@
-import { LikeOutlined, LoadingOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
-import { useRequest } from '@umijs/max';
-import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
-import { DefaultOptionType } from 'antd/es/select';
 import type { FC } from 'react';
 import React, { useMemo } from 'react';
+import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
+import type { DefaultOptionType } from 'antd/es/select';
+import {
+  LikeOutlined,
+  LoadingOutlined,
+  MessageOutlined,
+  StarOutlined,
+} from '@ant-design/icons';
+import { useRequest } from '@umijs/max';
 import { categoryOptions } from '../../mock';
 import ArticleListContent from './components/ArticleListContent';
 import StandardFormRow from './components/StandardFormRow';
@@ -29,7 +34,7 @@ const Articles: FC = () => {
     },
     {
       loadMore: true,
-    },
+    }
   );
 
   const list = data?.list || [];
@@ -122,7 +127,7 @@ const Articles: FC = () => {
         label: item.name,
         value: item.id,
       })),
-    [owners],
+    [owners]
   );
 
   return (
@@ -140,7 +145,10 @@ const Articles: FC = () => {
             <FormItem name="category">
               <TagSelect expandable>
                 {categoryOptions.map((category) => (
-                  <TagSelect.Option value={category.value!} key={category.value}>
+                  <TagSelect.Option
+                    value={category.value!}
+                    key={category.value}
+                  >
                     {category.label}
                   </TagSelect.Option>
                 ))}
@@ -198,9 +206,9 @@ const Articles: FC = () => {
         style={{ marginTop: 24 }}
         variant="borderless"
         styles={{
-          body:{
-            padding: '8px 32px 32px 32px'
-          }
+          body: {
+            padding: '8px 32px 32px 32px',
+          },
         }}
       >
         <List<ListItemDataType>

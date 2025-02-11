@@ -1,3 +1,6 @@
+import type { FC } from 'react';
+import { useState } from 'react';
+import { Card, Col, message, Popover, Row } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import type { ProColumnType } from '@ant-design/pro-components';
 import {
@@ -10,9 +13,6 @@ import {
   ProFormText,
   ProFormTimePicker,
 } from '@ant-design/pro-components';
-import { Card, Col, message, Popover, Row } from 'antd';
-import type { FC } from 'react';
-import { useState } from 'react';
 import { fakeSubmitForm } from './service';
 import useStyles from './style.style';
 interface TableFormDateType {
@@ -80,9 +80,19 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       if (!err || err.errors.length === 0) {
         return null;
       }
-      const key = err.name[0] as 'name' | 'url' | 'owner' | 'approver' | 'dateRange' | 'type';
+      const key = err.name[0] as
+        | 'name'
+        | 'url'
+        | 'owner'
+        | 'approver'
+        | 'dateRange'
+        | 'type';
       return (
-        <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
+        <li
+          key={key}
+          className={styles.errorListItem}
+          onClick={() => scrollToField(key)}
+        >
           <CloseCircleOutlined className={styles.errorIcon} />
           <div className={styles.errorMessage}>{err.errors[0]}</div>
           <div className={styles.errorField}>{fieldLabels[key]}</div>

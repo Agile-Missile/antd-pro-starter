@@ -1,3 +1,5 @@
+import type { FC } from 'react';
+import { Button, Result } from 'antd';
 import {
   ModalForm,
   ProFormDateTimePicker,
@@ -5,8 +7,6 @@ import {
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-components';
-import { Button, Result } from 'antd';
-import type { FC } from 'react';
 import type { BasicListItemDataType } from '../data.d';
 import useStyles from '../style.style';
 type OperationModalProps = {
@@ -42,9 +42,9 @@ const OperationModal: FC<OperationModalProps> = (props) => {
         destroyOnClose: true,
         styles: done
           ? {
-              body:{
+              body: {
                 padding: '72px 0',
-              }
+              },
             }
           : {},
       }}
