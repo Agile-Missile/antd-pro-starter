@@ -8,12 +8,12 @@ const Footer: React.FC = () => {
       style={{
         background: 'none',
       }}
-      copyright="Powered by Ant Desgin"
+      copyright="Powered by Agilejs"
       links={[
         {
-          key: 'Ant Design Pro',
-          title: 'Ant Design Pro',
-          href: 'https://pro.ant.design',
+          key: 'Agilejs1',
+          title: 'Agilejs',
+          href: 'https://agilejs.com',
           blankTarget: true,
         },
         {
@@ -23,8 +23,8 @@ const Footer: React.FC = () => {
           blankTarget: true,
         },
         {
-          key: 'Ant Design',
-          title: 'Ant Design',
+          key: 'Agilejs2',
+          title: 'Agilejs',
           href: 'https://ant.design',
           blankTarget: true,
         },

@@ -5,6 +5,12 @@
 .ant-layout {
   min-height: 100vh;
 }
+
+.ant-pro-layout-content {
+  padding-block : unset !important;
+  padding-inline: unset !important;
+}
+
 .ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed {
   left: unset;
 }
@@ -14,8 +20,8 @@ canvas {
 }
 
 body {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  text-rendering         : optimizeLegibility;
+  -webkit-font-smoothing : antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -26,14 +32,17 @@ ol {
 
 @media (max-width: 768px) {
   .ant-table {
-    width: 100%;
+    width     : 100%;
     overflow-x: auto;
-    &-thead > tr,
-    &-tbody > tr {
-      > th,
-      > td {
+
+    &-thead>tr,
+    &-tbody>tr {
+
+      >th,
+      >td {
         white-space: pre;
-        > span {
+
+        >span {
           display: block;
         }
       }

@@ -17,6 +17,7 @@ const Settings: ProLayoutProps & {
   colorWeak: false,
   title: 'Ant Design Pro',
   pwa: true,
+  siderMenuType: 'sub',
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: '',
   token: {

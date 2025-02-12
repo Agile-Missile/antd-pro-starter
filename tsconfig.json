@@ -1,6 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": "./",
     "target": "esnext",
@@ -8,14 +6,17 @@
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
+    "suppressImplicitAnyIndexErrors": true,
     "declaration": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@@/*": ["./src/.umi/*"],
+      "@@test/*": ["./src/.umi-test/*"]
     }
   },
   "include": ["./**/*.d.ts", "./**/*.ts", "./**/*.tsx"]

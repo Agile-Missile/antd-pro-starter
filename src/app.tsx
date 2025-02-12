@@ -1,12 +1,19 @@
+import { ConfigProvider } from 'antd';
 import { AvatarDropdown, AvatarName, Footer, Question } from '@/components';
 import { LinkOutlined } from '@ant-design/icons';
-import type { Settings as LayoutSettings } from '@ant-design/pro-components';
+import type {
+  MenuDataItem,
+  Settings as LayoutSettings,
+} from '@ant-design/pro-components';
+import { PageLoading } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RequestConfig, RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
+import KeepAliveTabs from './components/KeepAliveTabs';
 import { errorConfig } from './requestErrorConfig';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
+
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
@@ -50,12 +57,33 @@ export async function getInitialState(): Promise<{
   };
 }
 
+const filterMenuByPaths = (
+  menuData: MenuDataItem[],
+  allowedPaths: string[]
+): MenuDataItem[] => {
+  return menuData
+    .map((item) => {
+      if (item.children) {
+        const filteredRoutes = filterMenuByPaths(item.children, allowedPaths);
+        return filteredRoutes.length > 0
+          ? { ...item, children: filteredRoutes }
+          : null;
+      }
+      return allowedPaths.find((path) => path === item.path) ? item : null;
+    })
+    .filter(Boolean) as MenuDataItem[];
+};
+
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({
   initialState,
   setInitialState,
 }) => {
   return {
+    postMenuData: (menuData) => {
+      const menus = initialState?.currentUser?.menus || [];
+      return filterMenuByPaths(menuData || [], menus);
+    },
     actionsRender: () => [<Question key="doc" />],
     avatarProps: {
       src: initialState?.currentUser?.avatar,
@@ -104,28 +132,33 @@ export const layout: RunTimeLayoutConfig = ({
         ]
       : [],
     menuHeaderRender: undefined,
+    headerRender: (_, defaultDom) => {
+      return <>{defaultDom}</>;
+    },
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
     childrenRender: (children) => {
-      // if (initialState?.loading) return <PageLoading />;
+      if (initialState?.loading) return <PageLoading />;
       return (
-        <>
-          {children}
-          {isDev && (
-            <SettingDrawer
-              disableUrlParams
-              enableDarkTheme
-              settings={initialState?.settings}
-              onSettingChange={(settings) => {
-                setInitialState((preInitialState) => ({
-                  ...preInitialState,
-                  settings,
-                }));
-              }}
-            />
-          )}
-        </>
+        <ConfigProvider componentSize="middle">
+          <>
+            <KeepAliveTabs>{children}</KeepAliveTabs>
+            {isDev && (
+              <SettingDrawer
+                disableUrlParams
+                enableDarkTheme
+                settings={initialState?.settings}
+                onSettingChange={(settings) => {
+                  setInitialState((preInitialState) => ({
+                    ...preInitialState,
+                    settings,
+                  }));
+                }}
+              />
+            )}
+          </>
+        </ConfigProvider>
       );
     },
     ...initialState?.settings,
@@ -138,6 +171,6 @@ export const layout: RunTimeLayoutConfig = ({
  * @doc https://umijs.org/docs/max/request#配置
  */
 export const request: RequestConfig = {
-  baseURL: 'https://proapi.azurewebsites.net',
+  // baseURL: 'https://proapi.azurewebsites.net',
   ...errorConfig,
 };

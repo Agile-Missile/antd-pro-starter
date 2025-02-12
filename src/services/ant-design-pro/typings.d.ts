@@ -20,6 +20,7 @@ declare namespace API {
     };
     address?: string;
     phone?: string;
+    menus?: string[];
   };
 
   type LoginResult = {
