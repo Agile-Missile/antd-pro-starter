@@ -63,6 +63,7 @@
     "react-fittext": "^1.0.0"
   },
   "devDependencies": {
+    "@agilejs/typing-beautify": "1.0.6",
     "@ant-design/pro-cli": "^2.1.5",
     "@commitlint/cli": "19.7.1",
     "@commitlint/config-conventional": "19.7.1",
