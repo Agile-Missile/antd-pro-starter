@@ -1,9 +1,10 @@
-import { Fragment, useEffect, useState } from 'react';
-import { Tabs } from 'antd';
-import { treeToArray } from '@dimjs/utils';
-import { history, useLocation } from '@umijs/max';
-import routes from '../../../config/routes';
-import './index.less';
+import routes from "../../../config/routes";
+import "./index.less";
+import { treeToArray } from "@dimjs/utils";
+import { history, useLocation } from "@umijs/max";
+import { Tabs } from "antd";
+import { Fragment, useEffect, useState } from "react";
+
 export default function KeepAliveTabs({
   children,
 }: {
@@ -14,7 +15,7 @@ export default function KeepAliveTabs({
   const [tabs, setTabs] = useState<{ label: string; key: string }[]>([]);
 
   const findRouteName = () => {
-    const routeArr = treeToArray<any, 'routes'>(routes, 'routes');
+    const routeArr = treeToArray<any, "routes">(routes, "routes");
     const route = routeArr.find((route) => route.path === location.pathname);
     return route?.name;
   };
@@ -37,16 +38,16 @@ export default function KeepAliveTabs({
   }, [location.pathname]);
 
   // 关闭 Tab
-  const removeTab = (targetKey: string) => {
-    const newTabs = tabs.filter((tab) => tab.key !== targetKey);
-    setTabs(newTabs);
-    if (targetKey === activeKey) {
-      history.push(newTabs[newTabs.length - 1]?.key);
-    }
-  };
+  // const removeTab = (targetKey: string) => {
+  //   const newTabs = tabs.filter((tab) => tab.key !== targetKey);
+  //   setTabs(newTabs);
+  //   if (targetKey === activeKey) {
+  //     history.push(newTabs[newTabs.length - 1]?.key);
+  //   }
+  // };
 
   return (
-    <div className={'keep-alive-tabs'}>
+    <div className={"keep-alive-tabs"}>
       {tabs.length > 1 && (
         <Tabs
           size="small"
