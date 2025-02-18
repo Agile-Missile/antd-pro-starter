@@ -2,13 +2,21 @@
     display       : flex;
     flex-direction: column;
     height        : 100%;
+    width         : 100%;
     overflow      : hidden;
 
+    .tabs-container {
+        margin         : 0;
+        position       : fixed;
+        z-index        : 99;
+        display        : flex;
+        flex-direction : row;
+        justify-content: space-between;
+        box-sizing     : border-box;
+    }
+
     .tabs {
-        margin  : 0px;
-        position: fixed;
-        width   : 100%;
-        z-index : 9999;
+        width: 100%;
 
         .ant-tabs-tab {
             margin       : 0 !important;
@@ -17,17 +25,14 @@
             border-radius: 0 !important;
             height       : 38px;
             padding      : 0 16px !important;
-            background   : transparent !important;
 
             &.ant-tabs-tab-active {
-                background-color: white !important;
-                border-bottom   : none !important;
+                border-bottom: none !important;
             }
         }
 
         .ant-tabs-nav {
-            margin          : 0 !important;
-            background-color: white;
+            margin: 0 !important;
 
             &::before {
                 border: none !important;

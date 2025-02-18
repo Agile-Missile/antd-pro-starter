@@ -60,7 +60,8 @@
     "rc-util": "^5.38.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-fittext": "^1.0.0"
+    "react-fittext": "^1.0.0",
+    "usehooks-ts": "^3.1.1"
   },
   "devDependencies": {
     "@agilejs/typing-beautify": "1.0.6",

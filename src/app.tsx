@@ -12,7 +12,7 @@ import { PageLoading } from "@ant-design/pro-components";
 import { SettingDrawer } from "@ant-design/pro-components";
 import type { RequestConfig, RunTimeLayoutConfig } from "@umijs/max";
 import { history, Link } from "@umijs/max";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, theme } from "antd";
 
 const isDev = process.env.NODE_ENV === "development";
 const loginPath = "/user/login";
@@ -133,7 +133,10 @@ export const layout: RunTimeLayoutConfig = ({
       : [],
     menuHeaderRender: undefined,
     headerRender: (_, defaultDom) => {
-      return <>{defaultDom}</>;
+      const { token } = theme.useToken();
+      return (
+        <div style={{ backgroundColor: token.colorBgBase }}>{defaultDom}</div>
+      );
     },
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
