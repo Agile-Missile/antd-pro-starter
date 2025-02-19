@@ -14,7 +14,7 @@ for (let i = 0; i < fakeY.length; i += 1) {
   });
 }
 
-const visitData2 = [];
+const visitData2: DataItem[] = [];
 const fakeY2 = [1, 6, 4, 8, 3, 7, 2];
 for (let i = 0; i < fakeY2.length; i += 1) {
   visitData2.push({

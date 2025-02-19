@@ -1,5 +1,3 @@
-// @ts-ignore
-
 declare namespace API {
   type CurrentUser = {
     name?: string;
