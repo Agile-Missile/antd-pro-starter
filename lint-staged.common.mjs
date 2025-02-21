@@ -57,5 +57,6 @@ export const getEslintFixCmd = ({
       .map((f) => `"./${path.relative(cwd, f)}"`)
       .join(' '),
   ].join(' ');
+  console.log(`eslint ${args}`);
   return `eslint ${args}`;
 };

@@ -1,13 +1,11 @@
-import type { FormValueType } from "./components/UpdateForm";
-import UpdateForm from "./components/UpdateForm";
-import type { TableListItem, TableListPagination } from "./data";
-import { addRule, removeRule, rule, updateRule } from "./service";
-import { PlusOutlined } from "@ant-design/icons";
+import React, { useRef, useState } from 'react';
+import { Button, Drawer, Input, message } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import type {
   ActionType,
   ProColumns,
   ProDescriptionsItemProps,
-} from "@ant-design/pro-components";
+} from '@ant-design/pro-components';
 import {
   FooterToolbar,
   ModalForm,
@@ -16,9 +14,11 @@ import {
   ProFormText,
   ProFormTextArea,
   ProTable,
-} from "@ant-design/pro-components";
-import { Button, Drawer, Input, message } from "antd";
-import React, { useRef, useState } from "react";
+} from '@ant-design/pro-components';
+import type { FormValueType } from './components/UpdateForm';
+import UpdateForm from './components/UpdateForm';
+import type { TableListItem, TableListPagination } from './data';
+import { addRule, removeRule, rule, updateRule } from './service';
 
 /**
  * 添加节点
@@ -27,16 +27,16 @@ import React, { useRef, useState } from "react";
  */
 
 const handleAdd = async (fields: TableListItem) => {
-  const hide = message.loading("正在添加");
+  const hide = message.loading('正在添加');
 
   try {
     await addRule({ ...fields });
     hide();
-    message.success("添加成功");
+    message.success('添加成功');
     return true;
   } catch {
     hide();
-    message.error("添加失败请重试！");
+    message.error('添加失败请重试！');
     return false;
   }
 };
@@ -50,7 +50,7 @@ const handleUpdate = async (
   fields: FormValueType,
   currentRow?: TableListItem
 ) => {
-  const hide = message.loading("正在配置");
+  const hide = message.loading('正在配置');
 
   try {
     await updateRule({
@@ -58,11 +58,11 @@ const handleUpdate = async (
       ...fields,
     });
     hide();
-    message.success("配置成功");
+    message.success('配置成功');
     return true;
   } catch {
     hide();
-    message.error("配置失败请重试！");
+    message.error('配置失败请重试！');
     return false;
   }
 };
@@ -73,7 +73,7 @@ const handleUpdate = async (
  */
 
 const handleRemove = async (selectedRows: TableListItem[]) => {
-  const hide = message.loading("正在删除");
+  const hide = message.loading('正在删除');
   if (!selectedRows) return true;
 
   try {
@@ -81,11 +81,11 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
       key: selectedRows.map((row) => row.key),
     });
     hide();
-    message.success("删除成功，即将刷新");
+    message.success('删除成功，即将刷新');
     return true;
   } catch {
     hide();
-    message.error("删除失败，请重试");
+    message.error('删除失败，请重试');
     return false;
   }
 };
@@ -105,9 +105,9 @@ const TableList: React.FC = () => {
 
   const columns: ProColumns<TableListItem>[] = [
     {
-      title: "规则名称",
-      dataIndex: "name",
-      tip: "规则名称是唯一的 key",
+      title: '规则名称',
+      dataIndex: 'name',
+      tip: '规则名称是唯一的 key',
       render: (dom, entity) => {
         return (
           <a
@@ -122,53 +122,53 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: "描述",
-      dataIndex: "desc",
-      valueType: "textarea",
+      title: '描述',
+      dataIndex: 'desc',
+      valueType: 'textarea',
     },
     {
-      title: "服务调用次数",
-      dataIndex: "callNo",
+      title: '服务调用次数',
+      dataIndex: 'callNo',
       sorter: true,
       hideInForm: true,
       renderText: (val: string) => `${val}万`,
     },
     {
-      title: "状态",
-      dataIndex: "status",
+      title: '状态',
+      dataIndex: 'status',
       hideInForm: true,
       valueEnum: {
         0: {
-          text: "关闭",
-          status: "Default",
+          text: '关闭',
+          status: 'Default',
         },
         1: {
-          text: "运行中",
-          status: "Processing",
+          text: '运行中',
+          status: 'Processing',
         },
         2: {
-          text: "已上线",
-          status: "Success",
+          text: '已上线',
+          status: 'Success',
         },
         3: {
-          text: "异常",
-          status: "Error",
+          text: '异常',
+          status: 'Error',
         },
       },
     },
     {
-      title: "上次调度时间",
+      title: '上次调度时间',
       sorter: true,
-      dataIndex: "updatedAt",
-      valueType: "dateTime",
+      dataIndex: 'updatedAt',
+      valueType: 'dateTime',
       renderFormItem: (item, { defaultRender, ...rest }, form) => {
-        const status = form.getFieldValue("status");
+        const status = form.getFieldValue('status');
 
-        if (`${status}` === "0") {
+        if (`${status}` === '0') {
           return false;
         }
 
-        if (`${status}` === "3") {
+        if (`${status}` === '3') {
           return <Input {...rest} placeholder="请输入异常原因！" />;
         }
 
@@ -176,9 +176,9 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: "操作",
-      dataIndex: "option",
-      valueType: "option",
+      title: '操作',
+      dataIndex: 'option',
+      valueType: 'option',
       render: (_, record) => [
         <a
           key="config"
@@ -228,18 +228,18 @@ const TableList: React.FC = () => {
         <FooterToolbar
           extra={
             <div>
-              已选择{" "}
+              已选择{' '}
               <a
                 style={{
                   fontWeight: 600,
                 }}
               >
                 {selectedRowsState.length}
-              </a>{" "}
+              </a>{' '}
               项 &nbsp;&nbsp;
               <span>
-                服务调用次数总计{" "}
-                {selectedRowsState.reduce((pre, item) => pre + item.callNo!, 0)}{" "}
+                服务调用次数总计{' '}
+                {selectedRowsState.reduce((pre, item) => pre + item.callNo!, 0)}{' '}
                 万
               </span>
             </div>
@@ -276,7 +276,7 @@ const TableList: React.FC = () => {
           rules={[
             {
               required: true,
-              message: "规则名称为必填项",
+              message: '规则名称为必填项',
             },
           ]}
           width="md"

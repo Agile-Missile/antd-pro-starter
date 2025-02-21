@@ -1,4 +1,6 @@
-export default [
+import type { Route } from '@umijs/route-utils/dist/types';
+
+const routes: Route[] = [
   {
     path: '/user',
     layout: false,
@@ -218,3 +220,5 @@ export default [
   { path: '/', redirect: '/dashboard/analysis' },
   { component: '404', path: '/*' },
 ];
+
+export default routes;

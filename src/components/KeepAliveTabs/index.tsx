@@ -1,11 +1,12 @@
-import settings from "../../../config/defaultSettings";
-import routes from "../../../config/routes";
-import "./index.less";
-import { treeToArray } from "@dimjs/utils";
-import { history, useLocation } from "@umijs/max";
-import { Tabs, theme } from "antd";
-import { Fragment, useEffect, useRef, useState } from "react";
-import { useResizeObserver } from "usehooks-ts";
+import { Fragment, useEffect, useRef, useState } from 'react';
+import { Flex, Tabs, theme } from 'antd';
+import { useResizeObserver } from 'usehooks-ts';
+import { CloseOutlined } from '@ant-design/icons';
+import { history, useLocation } from '@umijs/max';
+import settings from '../../../config/defaultSettings';
+import type { LocalRoute } from './store';
+import { findRoute, getMenuFromSession, saveMenuToSession } from './store';
+import './index.less';
 
 export default function KeepAliveTabs({
   children,
@@ -17,49 +18,44 @@ export default function KeepAliveTabs({
   const ref = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const [activeKey, setActiveKey] = useState(location.pathname);
-  const [tabs, setTabs] = useState<{ label: string; key: string }[]>([]);
+  const [tabs, setTabs] = useState<LocalRoute[]>([]);
   const { width = 0 } = useResizeObserver({
     ref,
-    box: "border-box",
+    box: 'border-box',
   });
 
   if (!keepAliveTabs) {
     return <>{children}</>;
   }
 
-  const findRouteName = () => {
-    const routeArr = treeToArray<any, "routes">(routes, "routes");
-    const route = routeArr.find((route) => route.path === location.pathname);
-    return route?.name;
-  };
-
   useEffect(() => {
-    if (!tabs.find((tab) => tab.key === location.pathname)) {
-      const routeName = findRouteName();
-      console.log(routeName);
-      setTabs([
-        ...tabs,
-        {
-          label: routeName || document.title || location.pathname,
-          key: location.pathname,
-        },
-      ]);
+    if (!tabs.find((tab) => tab.path === location.pathname)) {
+      const currentRoute = findRoute();
+      if (currentRoute) {
+        const newTabs = [...tabs, currentRoute];
+        setTabs(newTabs);
+        saveMenuToSession(currentRoute);
+      }
     }
     setActiveKey(location.pathname);
   }, [location.pathname]);
 
+  useEffect(() => {
+    const menus = getMenuFromSession();
+    setTabs(menus);
+  }, []);
+
   const removeTab = (targetKey: string) => {
     const newTabs = tabs.filter((tab) => tab.key !== targetKey);
+    const lastTabKey = newTabs[newTabs.length - 1]?.key;
     setTabs(newTabs);
-    if (targetKey === activeKey) {
-      history.push(newTabs[newTabs.length - 1]?.key);
+    if (targetKey === activeKey && lastTabKey) {
+      history.push(lastTabKey);
     }
   };
 
-  console.log(token);
-
   return (
-    <div className={"keep-alive-tabs"} ref={ref}>
+    <div className={'keep-alive-tabs'} ref={ref}>
       {tabs.length > 1 && (
         <div
           className="tabs-container"
@@ -71,14 +67,26 @@ export default function KeepAliveTabs({
           <Tabs
             size="small"
             className="tabs"
-            type={keepAliveRemoveUnused ? "editable-card" : "card"}
-            onEdit={(targetKey) => {
-              removeTab(targetKey as string);
-            }}
+            type={'card'}
             activeKey={activeKey}
             onChange={(key) => history.push(key)}
             items={tabs.map((tab) => ({
               ...tab,
+              icon: null,
+              label: (
+                <Flex key={tab.key}>
+                  {tab.name}
+                  {keepAliveRemoveUnused && (
+                    <CloseOutlined
+                      style={{ fontSize: 12, marginLeft: 4 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeTab(tab.key);
+                      }}
+                    />
+                  )}
+                </Flex>
+              ),
               children: <Fragment />,
             }))}
           />
