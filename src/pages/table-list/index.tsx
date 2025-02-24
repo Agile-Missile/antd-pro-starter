@@ -16,7 +16,7 @@ import { useRequest } from '@umijs/max';
 import CreateForm from './components/CreateForm';
 import UpdateForm from './components/UpdateForm';
 const TableList: React.FC = () => {
-  const actionRef = useRef<ActionType>();
+  const actionRef = useRef<ActionType>(null);
   const [showDetail, setShowDetail] = useState<boolean>(false);
   const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
   const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([]);

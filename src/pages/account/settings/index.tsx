@@ -23,7 +23,7 @@ const Settings: React.FC = () => {
     mode: 'inline',
     selectKey: 'base',
   });
-  const dom = useRef<HTMLDivElement>();
+  const dom = useRef<HTMLDivElement>(null);
   const resize = () => {
     requestAnimationFrame(() => {
       if (!dom.current) {
