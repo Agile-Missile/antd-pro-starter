@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Suspense, useState } from 'react';
 import { Col, Dropdown, Row } from 'antd';
-import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
+import type { PickerProps } from 'antd/es/date-picker/generatePicker';
 import type { RadioChangeEvent } from 'antd/es/radio';
 import type dayjs from 'dayjs';
 import { EllipsisOutlined } from '@ant-design/icons';
@@ -18,7 +18,8 @@ import type { AnalysisData } from './data.d';
 import { fakeChartData } from './service';
 import useStyles from './style.style';
 import { getTimeDistance } from './utils/utils';
-type RangePickerValue = RangePickerProps<dayjs.Dayjs>['value'];
+
+type RangePickerValue = PickerProps<dayjs.Dayjs>['value'];
 type AnalysisProps = {
   dashboardAndanalysis: AnalysisData;
   loading: boolean;

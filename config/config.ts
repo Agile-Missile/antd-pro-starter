@@ -119,6 +119,7 @@ export default defineConfig({
       async: true,
     },
   ],
+
   //================ pro 插件配置 =================
   presets: ['umi-presets-pro'],
   /**
@@ -141,6 +142,7 @@ export default defineConfig({
       projectName: 'swagger',
     },
   ],
+
   mock: {
     include: ['mock/**/*', 'src/pages/**/_mock.ts'],
   },
@@ -149,4 +151,5 @@ export default defineConfig({
   },
   esbuildMinifyIIFE: true,
   requestRecord: {},
+  tailwindcss: {},
 });
