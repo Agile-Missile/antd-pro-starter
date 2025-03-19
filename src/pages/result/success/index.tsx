@@ -6,7 +6,7 @@ import useStyles from './index.style';
 
 const { Step } = Steps;
 
-export default () => {
+export default function Success() {
   const { styles } = useStyles();
   const desc1 = (
     <div className={styles.title}>
@@ -135,4 +135,4 @@ export default () => {
       </Card>
     </GridContent>
   );
-};
+}

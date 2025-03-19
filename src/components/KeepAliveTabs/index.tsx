@@ -1,11 +1,11 @@
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment, type RefObject, useEffect, useRef, useState } from 'react';
 import { Flex, Tabs, theme } from 'antd';
 import { useResizeObserver } from 'usehooks-ts';
 import { CloseOutlined } from '@ant-design/icons';
 import { history, useLocation } from '@umijs/max';
-import settings from '../../../config/defaultSettings';
-import type { LocalRoute } from './store';
-import { findRoute, getMenuFromSession, saveMenuToSession } from './store';
+import settings from '../../../config/defaultSettings.js';
+import type { LocalRoute } from './store.js';
+import { findRoute, getMenuFromSession, saveMenuToSession } from './store.js';
 import './index.less';
 
 export default function KeepAliveTabs({
@@ -20,7 +20,7 @@ export default function KeepAliveTabs({
   const [activeKey, setActiveKey] = useState(location.pathname);
   const [tabs, setTabs] = useState<LocalRoute[]>([]);
   const { width = 0 } = useResizeObserver({
-    ref,
+    ref: ref as RefObject<HTMLElement>,
     box: 'border-box',
   });
 

@@ -95,7 +95,7 @@ const Workplace: FC = () => {
     useRequest(queryActivities);
   const { data } = useRequest(fakeChartData);
   const renderActivities = (item: ActivitiesType) => {
-    const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
+    const events = item.template.split(/@\{([^{}]*)\}/g).map((key) => {
       if (item[key as keyof ActivitiesType]) {
         const value = item[key as 'user'];
         return (

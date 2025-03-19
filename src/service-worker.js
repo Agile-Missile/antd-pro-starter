@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* globals workbox */
 workbox.core.setCacheNameDetails({
   prefix: 'antd-pro',

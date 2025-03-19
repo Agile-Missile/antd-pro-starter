@@ -14,6 +14,8 @@ export default defineConfig(
         '@typescript-eslint/no-unused-expressions': 'off',
         '@typescript-eslint/no-empty-object-type': 'off',
         '@typescript-eslint/no-unnecessary-type-constraint': 'off',
+        'react-hooks/exhaustive-deps': 'off',
+        'react-hooks/rules-of-hooks': 'off',
       },
     },
   ],

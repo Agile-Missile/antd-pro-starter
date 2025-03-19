@@ -2,9 +2,9 @@ import { Fragment } from 'react';
 import { Button, Card, Result } from 'antd';
 import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { GridContent } from '@ant-design/pro-components';
-import useStyles from './index.style';
+import useStyles from './index.style.js';
 
-export default () => {
+export default function Fail() {
   const { styles } = useStyles();
   const Content = (
     <Fragment>
@@ -73,4 +73,4 @@ export default () => {
       </Card>
     </GridContent>
   );
-};
+}
