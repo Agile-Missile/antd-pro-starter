@@ -3,9 +3,9 @@ import { Flex, Tabs, theme } from 'antd';
 import { useResizeObserver } from 'usehooks-ts';
 import { CloseOutlined } from '@ant-design/icons';
 import { history, useLocation } from '@umijs/max';
-import settings from '../../../config/defaultSettings.js';
-import type { LocalRoute } from './store.js';
-import { findRoute, getMenuFromSession, saveMenuToSession } from './store.js';
+import settings from '../../../config/defaultSettings';
+import type { LocalRoute } from './store';
+import { findRoute, getMenuFromSession, saveMenuToSession } from './store';
 import './index.less';
 
 export default function KeepAliveTabs({
