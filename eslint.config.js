@@ -6,7 +6,6 @@ export default defineConfig(
     {
       rules: {
         '@typescript-eslint/no-explicit-any': 'off',
-        'tailwindcss/no-custom-classname': 'off',
         'sonarjs/no-duplicate-string': 'off',
         '@typescript-eslint/no-require-imports': 'off',
         '@typescript-eslint/ban-ts-comment': 'off',

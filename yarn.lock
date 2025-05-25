@@ -8559,7 +8559,6 @@ __metadata:
     react-dom: "npm:^19.1.0"
     react-fittext: "npm:^1.0.0"
     swagger-ui-dist: "npm:^5.20.8"
-    tailwindcss: "npm:^3"
     ts-node: "npm:^10.9.2"
     typescript: "npm:^5.8.3"
     umi-presets-pro: "npm:^2.0.3"
@@ -27890,7 +27889,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3, tailwindcss@npm:^3.4.14":
+"tailwindcss@npm:^3.4.14":
   version: 3.4.17
   resolution: "tailwindcss@npm:3.4.17"
   dependencies:
