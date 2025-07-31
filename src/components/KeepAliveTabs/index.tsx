@@ -1,11 +1,16 @@
-import { Fragment, type RefObject, useEffect, useRef, useState } from 'react';
-import { Flex, Tabs, theme } from 'antd';
+import type { RefObject } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { theme } from 'antd';
 import { useResizeObserver } from 'usehooks-ts';
 import { CloseOutlined } from '@ant-design/icons';
 import { history, useLocation } from '@umijs/max';
-import settings from '../../../config/defaultSettings';
 import type { LocalRoute } from './store';
-import { findRoute, getMenuFromSession, saveMenuToSession } from './store';
+import {
+  findRoute,
+  getMenuFromSession,
+  removeMenuToSession,
+  saveMenuToSession,
+} from './store';
 import './index.less';
 
 export default function KeepAliveTabs({
@@ -13,85 +18,115 @@ export default function KeepAliveTabs({
 }: {
   children: React.ReactNode;
 }) {
-  const { keepAliveTabs = true, keepAliveRemoveUnused = false } = settings;
   const { token } = theme.useToken();
   const ref = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const [activeKey, setActiveKey] = useState(location.pathname);
   const [tabs, setTabs] = useState<LocalRoute[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
+
   const { width = 0 } = useResizeObserver({
     ref: ref as RefObject<HTMLElement>,
     box: 'border-box',
   });
 
-  if (!keepAliveTabs) {
-    return <>{children}</>;
-  }
-
-  useEffect(() => {
-    if (!tabs.find((tab) => tab.path === location.pathname)) {
-      const currentRoute = findRoute();
-      if (currentRoute) {
-        const newTabs = [...tabs, currentRoute];
-        setTabs(newTabs);
-        saveMenuToSession(currentRoute);
-      }
-    }
-    setActiveKey(location.pathname);
-  }, [location.pathname]);
-
   useEffect(() => {
     const menus = getMenuFromSession();
     setTabs(menus);
+    setIsInitialized(true);
   }, []);
 
-  const removeTab = (targetKey: string) => {
-    const newTabs = tabs.filter((tab) => tab.key !== targetKey);
-    const lastTabKey = newTabs[newTabs.length - 1]?.key;
-    setTabs(newTabs);
-    if (targetKey === activeKey && lastTabKey) {
-      history.push(lastTabKey);
+  useEffect(() => {
+    if (!isInitialized) return;
+    if (location.pathname === '/') return;
+    const existingTab = tabs.find((tab) => tab.path === location.pathname);
+
+    if (!existingTab) {
+      const currentRoute = findRoute();
+      if (currentRoute) {
+        setTabs((prevTabs) => {
+          const newTabs = [...prevTabs, currentRoute];
+          saveMenuToSession(currentRoute);
+          return newTabs;
+        });
+      }
     }
-  };
+
+    setActiveKey(location.pathname);
+  }, [location.pathname, isInitialized]);
+
+  const removeTab = useCallback(
+    (targetKey: string, e?: React.MouseEvent) => {
+      e?.stopPropagation();
+
+      setTabs((prevTabs) => {
+        const newTabs = prevTabs.filter((tab) => tab.key !== targetKey);
+
+        removeMenuToSession(newTabs);
+
+        if (targetKey === activeKey && newTabs.length > 0) {
+          const lastTabKey = newTabs[newTabs.length - 1]?.key;
+          history.replace(lastTabKey);
+        }
+
+        return newTabs;
+      });
+    },
+    [activeKey]
+  );
+
+  const handleTabClick = useCallback(
+    (key: string) => {
+      if (key === activeKey) return;
+      setActiveKey(key);
+      history.push(key);
+    },
+    [activeKey]
+  );
+
+  const isActive = useCallback(
+    (key: string) => {
+      return key === activeKey;
+    },
+    [activeKey]
+  );
+
+  const hiddenCloseIcon = useCallback(() => {
+    return tabs.length <= 1;
+  }, [tabs]);
 
   return (
     <div className={'keep-alive-tabs'} ref={ref}>
-      {tabs.length > 1 && (
-        <div
-          className="tabs-container"
-          style={{
-            backgroundColor: token.colorBgLayout,
-            width: width,
-          }}
-        >
-          <Tabs
-            size="small"
-            className="tabs"
-            type={'card'}
-            activeKey={activeKey}
-            onChange={(key) => history.push(key)}
-            items={tabs.map((tab) => ({
-              ...tab,
-              icon: null,
-              label: (
-                <Flex key={tab.key}>
-                  {tab.name}
-                  {keepAliveRemoveUnused && (
-                    <CloseOutlined
-                      style={{ fontSize: 12, marginLeft: 4 }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeTab(tab.key);
-                      }}
-                    />
-                  )}
-                </Flex>
-              ),
-              children: <Fragment />,
-            }))}
-          />
-        </div>
-      )}
+      <div
+        className="tabs-header"
+        style={{
+          width: width,
+        }}
+      >
+        {tabs.map((tab) => (
+          <div
+            key={tab.key}
+            className="tab-item"
+            style={{
+              ...(isActive(tab.key)
+                ? {
+                    color: token.colorPrimary,
+                    borderBottom: `2px solid ${token.colorPrimary}`,
+                  }
+                : {}),
+            }}
+            onClick={() => handleTabClick(tab.key)}
+          >
+            <span>{tab.name}</span>
+            {!hiddenCloseIcon() && (
+              <CloseOutlined
+                className="close-icon"
+                onClick={(e) => removeTab(tab.key, e)}
+              />
+            )}
+          </div>
+        ))}
+      </div>
       <div className="tabs-content">{children}</div>
     </div>
   );
